@@ -1,34 +1,37 @@
-export function func(s, a, b) {
+const DEFAULT_VALUE = -1;
 
-    if (s.match(/^$/)) {
-        return -1;
-    }
+const getCharFromString = ({ index, string }) =>
+  string.substring(index, index + 1);
 
-    var i = s.length - 1;
-    var aIndex = -1;
-    var bIndex = -1;
+function func(s, a, b) {
+  if (s.match(/^$/) && (a || b)) {
+    return DEFAULT_VALUE;
+  }
 
-    while ((aIndex == -1) && (bIndex == -1) && (i > 0)) {
-        if (s.substring(i, i + 1) == a) {
-            aIndex = i;
-        }
-        if (s.substring(i, i + 1) == b) {
-            bIndex = i;
-        }
-        i = i - 1;
-    }
+  const isA = (index) =>
+    a && getCharFromString({ index, string: s }) === a.toString();
+  const isB = (index) =>
+    b && getCharFromString({ index, string: s }) === b.toString();
 
-    if (aIndex != -1) {
-        if (bIndex == -1) {
-            return aIndex;
-        } else {
-            return Math.max(aIndex, bIndex);
-        }
-    }
+  let i = s.length - 1;
+  let aIndex = DEFAULT_VALUE;
+  let bIndex = DEFAULT_VALUE;
 
-    if (bIndex != -1) {
-        return bIndex;
-    } else {
-        return -1;
-    }
+  while (aIndex === DEFAULT_VALUE && bIndex === DEFAULT_VALUE && i > 0) {
+    if (isA(i)) return i;
+    else if (isB(i)) return i;
+
+    i = i - 1;
+  }
+
+  // вариант 2 - через forEach, если бы он был доступен
+  //
+  //    s.forEach((char, index) => {
+  //      if (a && char === a.toString()) return index;
+  //      else if (b && char === b.toString()) return index;
+  //    });
+
+  return DEFAULT_VALUE;
 }
+
+module.exports = func;

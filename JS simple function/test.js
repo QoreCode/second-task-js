@@ -1,31 +1,37 @@
+const func = require("./index.js");
+
 try {
-    const testsData = [
-        {args: ['sntriignhgs', 'n'], expectedResult: 7},
-        {args: ['sntriignhgs', 'r', 'i'], expectedResult: 5},
-        {args: ['sntriignhgs', 'i', 'r'], expectedResult: 5},
-        {args: ['sntriignhgs', 'h', 'i'], expectedResult: 8},
-        {args: ['sntriignhgs', 'i'], expectedResult: 5},
-        {args: ['sntriignhgs', 'z', 'x'], expectedResult: -1},
-        {args: ['sntriignhgs', 'nhg', 'sn'], expectedResult: -1},
-        {args: ['sntriignhgs', 's', 'r'], expectedResult: 10},
-        {args: ['', 's', 'r'], expectedResult: -1}
-    ];
+  const testsData = [
+    { args: ["sntriignhgs", "n"], expectedResult: 7 },
+    { args: ["sntriignhgs", "r", "i"], expectedResult: 5 },
+    { args: ["sntriignhgs", "i", "r"], expectedResult: 5 },
+    { args: ["sntriignhgs", "h", "i"], expectedResult: 8 },
+    { args: ["sntriignhgs", "i"], expectedResult: 5 },
+    { args: ["sntriignhgs", "z", "x"], expectedResult: -1 },
+    { args: ["sntriignhgs", "nhg", "sn"], expectedResult: -1 },
+    { args: ["sntriignhgs", "s", "r"], expectedResult: 10 },
+    { args: ["", "s", "r"], expectedResult: -1 },
+    { args: [""], expectedResult: -1 },
+    { args: ["004003", 5, 3], expectedResult: 5 },
+  ];
 
-    testsData.forEach((testData) => test(testData.args, testData.expectedResult));
+  testsData.forEach((testData) => test(testData.args, testData.expectedResult));
 
-    console.info("Congratulations! All tests passed.");
+  console.info("Congratulations! All tests passed.");
 } catch (e) {
-    console.error(e);
+  console.error(e);
 }
 
 function test(args, expectedResult) {
-    const result = func(...args);
+  const result = func(...args);
 
-    if (result === expectedResult) {
-        console.info(`Test with args ${JSON.stringify(args)} is passed successfully.`);
+  if (result === expectedResult) {
+    console.info(
+      `Test with args ${JSON.stringify(args)} is passed successfully.`
+    );
 
-        return;
-    }
+    return;
+  }
 
-    throw new Error(`Test with index ${JSON.stringify(args)} is failed!`);
+  throw new Error(`Test with index ${JSON.stringify(args)} is failed!`);
 }
