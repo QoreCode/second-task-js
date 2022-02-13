@@ -1,67 +1,76 @@
-import { Door } from './door';
-import { WindowModel } from './window-model';
+import { DoorInterface, HouseInterface, HouseType, SecuritySystemInterface, WindowModelInterface, WindowsParams } from '../types';
+import { ClassicDoorModel, ModernDoorModel, NeoDoorModel } from './door';
+import { AmateurSecuritySystem, ModernSecuritySystem, ProfessionalSecuritySystem } from './security-system';
+import { ClassicWindowModel, ModernWindowModel, NeoWindowModel } from './window-model';
 
-export class House extends Door {
-  public maxFloor: number = 1;
-  public color: string = 'black';
-  public window1: WindowModel | null = null;
-  public window2: WindowModel | null = null;
-  public window3: WindowModel | null = null;
-  public window4: WindowModel | null = null;
+export class House implements HouseInterface {
+  protected maxFloor = 1;
+  protected color = 'black';
+  public readonly windows: WindowModelInterface[];
+  public readonly door: DoorInterface;
+  public readonly securitySystem?: SecuritySystemInterface;
+  public readonly securitySystemNotCreated: boolean = true;
+  public readonly type: HouseType = 'classic';
 
-  public constructor(
-    windowsConfig: { count: number, size: number; style: 'neo' | 'classic' | 'modern' },
-    doorConfig: { size: number; style: 'neo' | 'classic' | 'modern' },
-    securitySystemConfig?: { type: 'modern' | 'amateur' | 'professional' },
+  constructor(
+    type: HouseType = 'classic',
+    windows: WindowModelInterface[],
+    door: DoorInterface,
+    maxFloor: number,
+    color?: string,
+    securitySystem?: SecuritySystemInterface
   ) {
-
-    super();
-
-    if (securitySystemConfig) {
-      this.securitySystemNotCreated = true;
-      this.securitySystemType = securitySystemConfig.type;
+    this.type = type;
+    if (securitySystem) {
+      this.securitySystemNotCreated = false;
     }
-
-    if (windowsConfig.count >= 1) {
-      this.window1 = new WindowModel();
-      this.window1.size = windowsConfig.size;
-      this.window1.style = windowsConfig.style;
+    this.windows = windows;
+    this.door = door;
+    this.maxFloor = maxFloor;
+    if (color) {
+      this.color = color;
     }
-
-    if (windowsConfig.count >= 2) {
-      this.window2 = new WindowModel();
-      this.window2.size = windowsConfig.size;
-      this.window2.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 3) {
-      this.window3 = new WindowModel();
-      this.window3.size = windowsConfig.size;
-      this.window3.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 4) {
-      this.window4 = new WindowModel();
-      this.window4.size = windowsConfig.size;
-      this.window4.style = windowsConfig.style;
-    }
-
-    this.doorSize = doorConfig.size;
-    this.doorStyle = doorConfig.style;
   }
 
-  public openAllWindows() {
-    this.window1?.openWindow();
-    this.window2?.openWindow();
-    this.window3?.openWindow();
-    this.window4?.openWindow();
+  public openAllWindows(): void {
+    this.windows.forEach((window: WindowModelInterface) => window.openWindow());
   }
 
-  public paint(color: string) {
+  public paint(color: string): void {
     this.color = color;
   }
 
-  public addFloor() {
+  public addFloor(): void {
     this.maxFloor += 1;
+  }
+}
+
+export class NeoHouse extends House {
+  constructor(maxFloor: number, color?: string, windowsCount = 4, windowsSize = 30, doorSize = 60) {
+    const windows = [];
+    for (let i = 0; i < windowsCount; i++) {
+      windows.push(new NeoWindowModel(windowsSize));
+    }
+    super('neo', windows, new NeoDoorModel(doorSize), maxFloor, color, new ProfessionalSecuritySystem());
+  }
+}
+
+export class ClassicHouse extends House {
+  constructor(maxFloor: number, color?: string, windowsCount = 2, windowsSize = 15, doorSize = 40) {
+    const windows = [];
+    for (let i = 0; i < windowsCount; i++) {
+      windows.push(new ClassicWindowModel(windowsSize));
+    }
+    super('classic', windows, new ClassicDoorModel(doorSize), maxFloor, color, new AmateurSecuritySystem());
+  }
+}
+
+export class ModernHouse extends House {
+  constructor(maxFloor: number, color?: string, windowsCount = 3, windowsSize = 20, doorSize = 40) {
+    const windows = [];
+    for (let i = 0; i < windowsCount; i++) {
+      windows.push(new ModernWindowModel(windowsSize));
+    }
+    super('modern', windows, new ModernDoorModel(doorSize), maxFloor, color, new ModernSecuritySystem());
   }
 }

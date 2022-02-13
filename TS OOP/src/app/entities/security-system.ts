@@ -1,8 +1,20 @@
-export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+import { SecuritySystemInterface, SecuritySystemStatus, SecuritySystemType } from '../types';
+
+export abstract class SecuritySystem implements SecuritySystemInterface {
+  public readonly securitySystemType: SecuritySystemType;
+  protected status: SecuritySystemStatus;
+
+  protected enabled = false;
+
+  constructor(securitySystemType: SecuritySystemType = 'modern') {
+    this.securitySystemType = securitySystemType;
+    this.status = 'ok';
+  }
+
+  public getStatus(): SecuritySystemStatus {
+    //
+    return this.status;
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему
@@ -18,17 +30,32 @@ export class SecuritySystem {
     this.pushStatusNotification();
   }
 
+  protected abstract pushStatusNotification(): void;
+}
+
+export class AmateurSecuritySystem extends SecuritySystem {
+  constructor() {
+    super('amateur');
+  }
+  pushStatusNotification(): void {
+    // код, который уведомляет пользователя мелом на доске
+  }
+}
+
+export class ModernSecuritySystem extends SecuritySystem {
+  constructor() {
+    super('modern');
+  }
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === 'professional') {
-      // код, который уведомляет пользователя на почту
-    }
+    // код, который уведомляет пользователя на телефон
+  }
+}
 
-    if (this.securitySystemType === 'modern') {
-      // код, который уведомляет пользователя на телефон
-    }
-
-    if (this.securitySystemType === 'amateur') {
-      // код, который уведомляет пользователя мелом на доске
-    }
+export class ProfessionalSecuritySystem extends SecuritySystem {
+  constructor() {
+    super('professional');
+  }
+  protected pushStatusNotification(): void {
+    // код, который уведомляет пользователя на почту
   }
 }
