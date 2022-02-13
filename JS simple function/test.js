@@ -1,3 +1,5 @@
+const largest = require('./index');
+  
 try {
     const testsData = [
         {args: ['sntriignhgs', 'n'], expectedResult: 7},
@@ -19,7 +21,7 @@ try {
 }
 
 function test(args, expectedResult) {
-    const result = func(...args);
+    const result = largest(...args);
 
     if (result === expectedResult) {
         console.info(`Test with args ${JSON.stringify(args)} is passed successfully.`);
