@@ -1,4 +1,4 @@
-export class DBConnection {
+class DBConnection {
   private readonly host: string;
   private readonly user: string;
   private readonly pass: string;
@@ -21,11 +21,13 @@ export class DBConnection {
     // тут создается транзакция или что-либо угодно для сохранения сущности
   };
 
-  public closeConnection() {
+  public closeConnection(): void{
     // тут закрывается connection к источнику данных для выполнения запроса
   }
 
-  private openConnection() {
+  private openConnection(): void{
     // тут открывается connection к источнику данных для выполнения запроса
   }
 }
+
+export default new DBConnection('localhost', 'root', '1111', 'prod'); 
