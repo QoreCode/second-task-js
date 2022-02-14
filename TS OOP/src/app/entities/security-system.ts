@@ -1,8 +1,14 @@
+export type SecuritySystemType = 'modern' | 'amateur' | 'professional';
+
 export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+  protected securitySystemType: SecuritySystemType;
+  private status: 'ok' | 'warning' | 'error' = 'ok';
+  private enabled = false;
+  private securitySystemNotCreated = true; // Зачем это нужно?
+
+  constructor(securitySystemType: SecuritySystemType = 'modern') {
+    this.securitySystemType = securitySystemType;
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему
