@@ -1,25 +1,25 @@
-export type DoorStyle = 'neo' | 'classic' | 'modern';
-
 interface Props {
   size: number;
-  style: DoorStyle;
+  style: WindowStyle;
 }
 
-export class Door {
+export type WindowStyle = 'neo' | 'classic' | 'modern';
+
+export class Window {
   private size: number = 0;
-  private style: DoorStyle = 'neo';
+  private style: WindowStyle = 'neo';
   private isOpen: boolean = false;
 
-  constructor({ size, style }: Props) {
+  public constructor({ size, style }: Props) {
     this.size = size;
     this.style = style;
   }
 
-  public openDoor(): void {
+  public openWindow(): void {
     // код, который открывает дверь
   }
 
-  public closeDoor(): void {
+  public closeWindow(): void {
     // код, который закрывает дверь
   }
 }
