@@ -1,8 +1,18 @@
+interface Props {
+  type: SecuritySystemType;
+}
+
+export type SecuritySystemType = 'modern' | 'amateur' | 'professional';
+export type SecuritySystemStatus = 'ok' | 'warning' | 'error';
+
 export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+  private type: SecuritySystemType = 'modern';
+  private status: SecuritySystemStatus = 'ok';
+  private isEnabled: boolean = false;
+
+  public constructor({ type }: Props) {
+    this.type = type;
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему
@@ -19,15 +29,15 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === 'professional') {
+    if (this.type === 'professional') {
       // код, который уведомляет пользователя на почту
     }
 
-    if (this.securitySystemType === 'modern') {
+    if (this.type === 'modern') {
       // код, который уведомляет пользователя на телефон
     }
 
-    if (this.securitySystemType === 'amateur') {
+    if (this.type === 'amateur') {
       // код, который уведомляет пользователя мелом на доске
     }
   }

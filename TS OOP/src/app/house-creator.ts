@@ -1,57 +1,67 @@
 import { House } from './entities/house';
+import { HouseBuilder } from'./house-builder';
 
 export class HouseCreator {
-  public static createModernHouse(maxFloor: number = 1) {
-    const house = new House(
-      {count: 3, size: 20, style: 'modern'},
-      {size: 40, style: 'modern'},
-      {type: 'modern'},
-    );
+  private builder: HouseBuilder = new HouseBuilder();
 
-    house.color = 'pink';
-
-    if (maxFloor > 1) {
-      for (let i = 1; i < maxFloor; i++) {
-        house.addFloor();
-      }
-    }
-
-    return house;
+  public setBuilder(builder: HouseBuilder): void {
+    this.builder = builder;
   }
 
-  public static createNeoHouse(maxFloor: number = 1) {
-    const house = new House(
-      {count: 4, size: 30, style: 'neo'},
-      {size: 60, style: 'neo'},
-      {type: 'professional'},
-    );
+  public createModernHouse(maxFloor: number = 1): House {
+    this.builder
+      .addDoor({size: 40, style: 'modern'})
+      .addSecuritySystem({type: 'modern'})
+      .addColor('pink')
 
-    house.color = 'blue';
+    for (let i = 1; i < 3; i++) {
+      this.builder.addWindow({size: 20, style: 'modern'});
+    }
 
     if (maxFloor > 1) {
       for (let i = 1; i < maxFloor; i++) {
-        house.addFloor();
+        this.builder.addFloor();
       }
     }
 
-    return house;
+    return this.builder.getHouse();
   }
 
-  public static createClassicHouse(maxFloor: number = 1) {
-    const house = new House(
-      {count: 2, size: 15, style: 'classic'},
-      {size: 40, style: 'classic'},
-      {type: 'amateur'},
-    );
+  public createNeoHouse(maxFloor: number = 1): House {
+    this.builder
+      .addDoor({size: 60, style: 'neo'})
+      .addSecuritySystem({type: 'professional'})
+      .addColor('blue')
 
-    house.color = 'blue';
+    for (let i = 1; i < 4; i++) {
+      this.builder.addWindow({size: 30, style: 'neo'});
+    }
 
     if (maxFloor > 1) {
       for (let i = 1; i < maxFloor; i++) {
-        house.addFloor();
+        this.builder.addFloor();
       }
     }
 
-    return house;
+    return this.builder.getHouse();
+  }
+
+  public createClassicHouse(maxFloor: number = 1) {
+    this.builder
+      .addDoor({size: 40, style: 'classic'})
+      .addSecuritySystem({type: 'amateur'})
+      .addColor('blue')
+
+    for (let i = 1; i < 2; i++) {
+      this.builder.addWindow({size: 15, style: 'classic'});
+    }
+
+    if (maxFloor > 1) {
+      for (let i = 1; i < maxFloor; i++) {
+        this.builder.addFloor();
+      }
+    }
+
+    return this.builder.getHouse();
   }
 }

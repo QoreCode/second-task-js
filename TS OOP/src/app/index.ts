@@ -2,6 +2,7 @@
 
 import { DBConnection } from './db-connection';
 import { HouseCreator } from './house-creator';
+import { HouseBuilder } from './house-builder';
 import { House } from './entities/house';
 
 // --------- user1 --------- //
@@ -9,8 +10,11 @@ import { House } from './entities/house';
 async function user1ClientFlow() {
   const connection = new DBConnection('localhost', 'root', '1111', 'prod');
 
-  const house1 = HouseCreator.createClassicHouse(2);
-  const house2 = HouseCreator.createModernHouse(4);
+  const builder = new HouseBuilder();
+  const creator = new HouseCreator();
+  creator.setBuilder(builder);
+  const house1 = creator.createClassicHouse(2);
+  const house2 = creator.createModernHouse(4);
 
   await connection.save(house1);
   await connection.save(house2);
@@ -24,19 +28,23 @@ async function user1ClientFlow() {
 async function user2ClientFlow() {
   const connection = new DBConnection('localhost', 'root', '1111', 'prod');
 
-  const house1 = HouseCreator.createNeoHouse(1);
+  const builder = new HouseBuilder();
+  const creator = new HouseCreator();
+  creator.setBuilder(builder);
+  const house1 = creator.createNeoHouse(1);
 
   // custom
-  const house2 = new House(
-    {count: 2, size: 30, style: 'modern'},
-    {size: 60, style: 'neo'}
-  );
-  house2.color = 'blue';
-  house2.addFloor();
-  house2.addFloor();
-  house2.addFloor();
+  const house2 = builder
+    .addWindow({size: 30, style: 'modern'})
+    .addWindow({size: 30, style: 'modern'})
+    .addDoor({size: 60, style: 'neo'})
+    .addColor('blue')
+    .addFloor()
+    .addFloor()
+    .addFloor()
+    .getHouse();
 
-  const house3 = HouseCreator.createClassicHouse(3);
+  const house3 = creator.createClassicHouse(3);
 
   await connection.save(house1);
   await connection.save(house2);
@@ -52,6 +60,3 @@ user1ClientFlow().then(() => {
   console.log('//--------------------//');
   user2ClientFlow();
 });
-
-
-
