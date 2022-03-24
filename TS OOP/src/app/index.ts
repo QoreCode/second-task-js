@@ -1,13 +1,15 @@
 // вы можете редактировать этот файл, но его не нужно рефакторить)
 
 import { DBConnection } from './db-connection';
-import { HouseCreator } from './house-creator';
 import { House } from './entities/house';
+import { HouseCreator } from './house-creator';
 
 // --------- user1 --------- //
 
 async function user1ClientFlow() {
-  const connection = new DBConnection('localhost', 'root', '1111', 'prod');
+  const connection = new DBConnection(
+    'localhost', 'root', '1111', 'prod'
+  );
 
   const house1 = HouseCreator.createClassicHouse(2);
   const house2 = HouseCreator.createModernHouse(4);
