@@ -1,7 +1,7 @@
 export class WindowModel {
-  public size: number = 0;
+  public size = 0;
   public style: 'neo' | 'classic' | 'modern' = 'neo';
-  public open: boolean = false;
+  public open = false;
 
   public openWindow(): void {
     // код, который открывает дверь

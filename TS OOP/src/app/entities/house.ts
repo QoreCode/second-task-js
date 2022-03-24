@@ -2,8 +2,8 @@ import { Door } from './door';
 import { WindowModel } from './window-model';
 
 export class House extends Door {
-  public maxFloor: number = 1;
-  public color: string = 'black';
+  public maxFloor = 1;
+  public color = 'black';
   public window1: WindowModel | null = null;
   public window2: WindowModel | null = null;
   public window3: WindowModel | null = null;

@@ -1,9 +1,9 @@
 import { SecuritySystem } from './security-system';
 
 export class Door extends SecuritySystem {
-  public doorSize: number = 0;
+  public doorSize = 0;
   public doorStyle: 'neo' | 'classic' | 'modern' = 'neo';
-  public open: boolean = false;
+  public open = false;
 
   public openDoor(): void {
     // код, который открывает дверь
