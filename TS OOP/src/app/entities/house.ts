@@ -1,7 +1,8 @@
-import { Door } from './door';
+import { Door } from './Door';
 import { WindowModel } from './window-model';
 
-export class House extends Door {
+export class House {
+  private _door: Door;
   public maxFloor: number = 1;
   public color: string = 'black';
   public window1: WindowModel | null = null;
