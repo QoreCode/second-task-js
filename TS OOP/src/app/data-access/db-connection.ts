@@ -1,14 +1,14 @@
 export class DBConnection {
-  private readonly host: string;
-  private readonly user: string;
-  private readonly pass: string;
-  private readonly dbName: string;
+  private readonly _host: string;
+  private readonly _user: string;
+  private readonly _pass: string;
+  private readonly _dbName: string;
 
   public constructor(host: string, user: string, pass: string, dbName: string) {
-    this.host = host;
-    this.user = user;
-    this.pass = pass;
-    this.dbName = dbName;
+    this._host = host;
+    this._user = user;
+    this._pass = pass;
+    this._dbName = dbName;
 
     this.openConnection();
   }
