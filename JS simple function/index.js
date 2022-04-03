@@ -32,3 +32,23 @@ export function func(s, a, b) {
         return -1;
     }
 }
+
+/**
+ * refactored function
+ */
+
+ export function func(s, a, b) {
+
+    let result = -1
+
+    switch (s.length) {
+        case 0 || 1: return result
+        default: for (let i = 0; i < s.length; i++){
+            if (s[i] === a || s[i] === b){
+                result = i
+            }
+        } 
+        return result
+    }
+
+}
