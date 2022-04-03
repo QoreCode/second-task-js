@@ -1,3 +1,5 @@
+import { func } from "./index.js";
+
 try {
     const testsData = [
         {args: ['sntriignhgs', 'n'], expectedResult: 7},
@@ -8,7 +10,12 @@ try {
         {args: ['sntriignhgs', 'z', 'x'], expectedResult: -1},
         {args: ['sntriignhgs', 'nhg', 'sn'], expectedResult: -1},
         {args: ['sntriignhgs', 's', 'r'], expectedResult: 10},
-        {args: ['', 's', 'r'], expectedResult: -1}
+        {args: ['', 's', 'r'], expectedResult: -1},
+        {args: ['abc', 'a', 'd'], expectedResult: -1}, // Original func returns -1 if a or b == s[0]
+        {args: ['abc', 'd', 'a'], expectedResult: -1},
+        {args: ['1234567', 1, 4], expectedResult: 3}, // Need to test for eqeq cases,
+                                                      // as function can be used with bools or numbers elsewhere
+        {args: ['123123', true, false], expectedResult: 3},        
     ];
 
     testsData.forEach((testData) => test(testData.args, testData.expectedResult));
