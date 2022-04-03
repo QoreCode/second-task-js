@@ -1,16 +1,18 @@
 // вы можете редактировать этот файл, но его не нужно рефакторить)
 
-import { DBConnection } from './db-connection';
-import { HouseCreator } from './house-creator';
-import { House } from './entities/house';
+import { DBConnection } from './data-access/db-connection';
+import { HouseElementStyle } from './entities/styles/house-element-style';
+import { HouseBuilder } from './entities/house/house-builder';
+import { PredefinedHouseDirector } from './entities/house/predefined-house-director';
+import { DBConnectionProvider } from './data-access/db-connection-provider';
 
 // --------- user1 --------- //
 
 async function user1ClientFlow() {
-  const connection = new DBConnection('localhost', 'root', '1111', 'prod');
+  const connection = DBConnectionProvider.getConnection();
 
-  const house1 = HouseCreator.createClassicHouse(2);
-  const house2 = HouseCreator.createModernHouse(4);
+  const house1 = PredefinedHouseDirector.createClassicHouse(2);
+  const house2 = PredefinedHouseDirector.createModernHouse(4);
 
   await connection.save(house1);
   await connection.save(house2);
@@ -22,21 +24,22 @@ async function user1ClientFlow() {
 // --------- user2 --------- //
 
 async function user2ClientFlow() {
-  const connection = new DBConnection('localhost', 'root', '1111', 'prod');
+  const connection = DBConnectionProvider.getConnection();
 
-  const house1 = HouseCreator.createNeoHouse(1);
+  const house1 = PredefinedHouseDirector.createNeoHouse(1);
 
-  // custom
-  const house2 = new House(
-    {count: 2, size: 30, style: 'modern'},
-    {size: 60, style: 'neo'}
-  );
-  house2.color = 'blue';
-  house2.addFloor();
-  house2.addFloor();
-  house2.addFloor();
+  const house2 = new HouseBuilder()
+    .addFloor()
+    .addFloor()
+    .addFloor()
+    .switchToStyle(HouseElementStyle.Modern)
+    .addWindows(2, 30)
+    .switchToStyle(HouseElementStyle.Neo)
+    .addDoor(60)
+    .paint('blue')
+    .build();
 
-  const house3 = HouseCreator.createClassicHouse(3);
+  const house3 = PredefinedHouseDirector.createClassicHouse(3);
 
   await connection.save(house1);
   await connection.save(house2);
