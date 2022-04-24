@@ -1,9 +1,24 @@
 import {HouseStyle} from '../interfaces';
 
+export interface IWindowConfig {
+  size: number;
+  style: HouseStyle
+}
+
 export class WindowModel {
-  public size = 0;
-  public style: HouseStyle = HouseStyle.NEO;
+  public config: IWindowConfig = {
+    size: 0,
+    style: HouseStyle.NEO
+  }
+
   public open = false;
+
+  constructor(config: IWindowConfig) {
+    this.config = {
+      ...this.config,
+      ...config
+    }
+  }
 
   public openWindow(): void {
     // код, который открывает дверь

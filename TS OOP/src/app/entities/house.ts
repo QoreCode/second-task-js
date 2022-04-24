@@ -28,10 +28,7 @@ export class House {
     this.door = new Door(doorConfig);
 
     for (let i = 0; i < windowsConfig.count; i++) {
-      const window = new WindowModel();
-      window.size = windowsConfig.size;
-      window.style = windowsConfig.style;
-      this.windows.push(window);
+      this.windows.push(new WindowModel(windowsConfig));
     }
   }
 
