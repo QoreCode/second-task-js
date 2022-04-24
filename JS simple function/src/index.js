@@ -1,4 +1,4 @@
-export function func(s, a, b) {
+function func(s, a, b) {
 
     if (s.match(/^$/)) {
         return -1;
@@ -31,4 +31,8 @@ export function func(s, a, b) {
     } else {
         return -1;
     }
+}
+
+module.exports =  {
+    func
 }
