@@ -2,8 +2,8 @@ import { Door } from './door';
 import { WindowModel } from './window-model';
 
 export class House extends Door {
-  public maxFloor: number = 1;
-  public color: string = 'black';
+  public maxFloor = 1;
+  public color = 'black';
   public window1: WindowModel | null = null;
   public window2: WindowModel | null = null;
   public window3: WindowModel | null = null;
@@ -50,14 +50,14 @@ export class House extends Door {
     this.doorStyle = doorConfig.style;
   }
 
-  public openAllWindows() {
+  public openAllWindows(): void {
     this.window1?.openWindow();
     this.window2?.openWindow();
     this.window3?.openWindow();
     this.window4?.openWindow();
   }
 
-  public paint(color: string) {
+  public paint(color: string): void {
     this.color = color;
   }
 
