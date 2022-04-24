@@ -7,11 +7,16 @@ export interface ISecuritySystemConfig {
 export class SecuritySystem {
   public status: 'ok' | 'warning' | 'error' = 'ok';
   public enabled = false;
-  public securitySystemNotCreated = true;
-  private securitySystemType = SecurityType.MODERN;
+
+  public config: ISecuritySystemConfig = {
+    type: SecurityType.MODERN
+  }
 
   constructor(config?: Partial<ISecuritySystemConfig>) {
-    if (config?.type) this.securitySystemType = config.type;
+    this.config = {
+      ...this.config,
+      ...config
+    }
   }
 
   public enableSecuritySystem(): void {
@@ -29,7 +34,7 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    switch (this.securitySystemType) {
+    switch (this.config.type) {
       case SecurityType.PROFESSIONAL: {
         // код, который уведомляет пользователя на почту
         break;
