@@ -1,15 +1,32 @@
+import {SecurityStatus, SecurityType} from '../interfaces';
+
+export interface ISecuritySystemConfig {
+  type: SecurityType;
+}
+
 export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+  public status: SecurityStatus = SecurityStatus.OK;
+  public enabled = false;
+
+  public config: ISecuritySystemConfig = {
+    type: SecurityType.MODERN
+  }
+
+  constructor(config: ISecuritySystemConfig) {
+    this.config = {
+      ...this.config,
+      ...config
+    }
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему
+    this.enabled = true;
   }
 
   public disableSecuritySystem(): void {
     // код, который выключает систему
+    this.enabled = false;
   }
 
   public diagnosingSecuritySystem(): void {
@@ -19,16 +36,19 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === 'professional') {
-      // код, который уведомляет пользователя на почту
-    }
-
-    if (this.securitySystemType === 'modern') {
-      // код, который уведомляет пользователя на телефон
-    }
-
-    if (this.securitySystemType === 'amateur') {
-      // код, который уведомляет пользователя мелом на доске
+    switch (this.config.type) {
+      case SecurityType.PROFESSIONAL: {
+        // код, который уведомляет пользователя на почту
+        break;
+      }
+      case SecurityType.MODERN: {
+        // код, который уведомляет пользователя на телефон
+        break;
+      }
+      case SecurityType.AMATEUR: {
+        // код, который уведомляет пользователя мелом на доске
+        break;
+      }
     }
   }
 }
