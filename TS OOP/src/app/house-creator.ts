@@ -1,11 +1,12 @@
-import { House } from './entities/house';
+import {House} from './entities/house';
+import {HouseStyle, SecurityType} from './interfaces';
 
 export class HouseCreator {
   public static createModernHouse(maxFloor = 1): House {
     const house = new House(
-      {count: 3, size: 20, style: 'modern'},
-      {size: 40, style: 'modern'},
-      {type: 'modern'},
+      {count: 3, size: 20, style: HouseStyle.MODERN},
+      {size: 40, style: HouseStyle.MODERN},
+      {type: SecurityType.MODERN},
     );
 
     house.color = 'pink';
@@ -21,9 +22,9 @@ export class HouseCreator {
 
   public static createNeoHouse(maxFloor = 1): House {
     const house = new House(
-      {count: 4, size: 30, style: 'neo'},
-      {size: 60, style: 'neo'},
-      {type: 'professional'},
+      {count: 4, size: 30, style: HouseStyle.MODERN},
+      {size: 60, style: HouseStyle.MODERN},
+      {type: SecurityType.PROFESSIONAL},
     );
 
     house.color = 'blue';
@@ -39,9 +40,9 @@ export class HouseCreator {
 
   public static createClassicHouse(maxFloor = 1): House {
     const house = new House(
-      {count: 2, size: 15, style: 'classic'},
-      {size: 40, style: 'classic'},
-      {type: 'amateur'},
+      {count: 2, size: 15, style: HouseStyle.CLASSIC},
+      {size: 40, style: HouseStyle.CLASSIC},
+      {type: SecurityType.AMATEUR},
     );
 
     house.color = 'blue';

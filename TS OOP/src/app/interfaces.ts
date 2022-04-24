@@ -3,3 +3,9 @@ export enum HouseStyle {
   CLASSIC = 'classic',
   MODERN = 'modern'
 }
+
+export enum SecurityType {
+  MODERN = 'modern',
+  AMATEUR = 'amateur',
+  PROFESSIONAL = 'professional'
+}

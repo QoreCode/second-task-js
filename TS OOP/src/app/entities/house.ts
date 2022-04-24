@@ -1,4 +1,4 @@
-import {HouseStyle} from '../interfaces';
+import {HouseStyle, SecurityType} from '../interfaces';
 import { Door } from './door';
 import { WindowModel } from './window-model';
 
@@ -13,7 +13,7 @@ export class House extends Door {
   public constructor(
     windowsConfig: { count: number, size: number; style: HouseStyle },
     doorConfig: { size: number; style: HouseStyle },
-    securitySystemConfig?: { type: 'modern' | 'amateur' | 'professional' },
+    securitySystemConfig?: { type: SecurityType },
   ) {
 
     super();

@@ -1,5 +1,7 @@
+import {SecurityType} from '../interfaces';
+
 export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
+  public securitySystemType: SecurityType = SecurityType.MODERN;
   public status: 'ok' | 'warning' | 'error' = 'ok';
   public enabled = false;
   public securitySystemNotCreated = true;

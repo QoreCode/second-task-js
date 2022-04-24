@@ -1,8 +1,9 @@
 // вы можете редактировать этот файл, но его не нужно рефакторить)
 
-import { DBConnection } from './db-connection';
-import { House } from './entities/house';
-import { HouseCreator } from './house-creator';
+import {DBConnection} from './db-connection';
+import {House} from './entities/house';
+import {HouseCreator} from './house-creator';
+import {HouseStyle} from './interfaces';
 
 // --------- user1 --------- //
 
@@ -28,8 +29,8 @@ async function user2ClientFlow(): Promise<void> {
 
   // custom
   const house2 = new House(
-    {count: 2, size: 30, style: 'modern'},
-    {size: 60, style: 'neo'}
+    {count: 2, size: 30, style: HouseStyle.MODERN},
+    {size: 60, style: HouseStyle.NEO}
   );
   house2.color = 'blue';
   house2.addFloor();
