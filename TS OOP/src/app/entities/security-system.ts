@@ -21,16 +21,19 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === SecurityType.PROFESSIONAL) {
-      // код, который уведомляет пользователя на почту
-    }
-
-    if (this.securitySystemType === SecurityType.MODERN) {
-      // код, который уведомляет пользователя на телефон
-    }
-
-    if (this.securitySystemType === SecurityType.AMATEUR) {
-      // код, который уведомляет пользователя мелом на доске
+    switch (this.securitySystemType) {
+      case SecurityType.PROFESSIONAL: {
+        // код, который уведомляет пользователя на почту
+        break;
+      }
+      case SecurityType.MODERN: {
+        // код, который уведомляет пользователя на телефон
+        break;
+      }
+      case SecurityType.AMATEUR: {
+        // код, который уведомляет пользователя мелом на доске
+        break;
+      }
     }
   }
 }
