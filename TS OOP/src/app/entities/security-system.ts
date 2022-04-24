@@ -21,15 +21,15 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === 'professional') {
+    if (this.securitySystemType === SecurityType.PROFESSIONAL) {
       // код, который уведомляет пользователя на почту
     }
 
-    if (this.securitySystemType === 'modern') {
+    if (this.securitySystemType === SecurityType.MODERN) {
       // код, который уведомляет пользователя на телефон
     }
 
-    if (this.securitySystemType === 'amateur') {
+    if (this.securitySystemType === SecurityType.AMATEUR) {
       // код, который уведомляет пользователя мелом на доске
     }
   }
