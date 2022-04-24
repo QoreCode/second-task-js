@@ -1,3 +1,5 @@
+const {func} = require("./index");
+
 try {
     const testsData = [
         {args: ['sntriignhgs', 'n'], expectedResult: 7},
