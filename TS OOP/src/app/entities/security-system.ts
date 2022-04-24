@@ -12,7 +12,7 @@ export class SecuritySystem {
     type: SecurityType.MODERN
   }
 
-  constructor(config?: Partial<ISecuritySystemConfig>) {
+  constructor(config: ISecuritySystemConfig) {
     this.config = {
       ...this.config,
       ...config

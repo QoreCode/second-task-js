@@ -9,7 +9,7 @@ export class House {
 
   public windows: WindowModel[] = [];
   public door: Door;
-  public securitySystem: SecuritySystem;
+  public securitySystem?: SecuritySystem;
 
   // этот флаг использовался в старом наследовании
   // оставил для возможной совместимости
@@ -24,9 +24,10 @@ export class House {
     securitySystemConfig?: { type: SecurityType },
   ) {
 
-    this.securitySystem = new SecuritySystem(securitySystemConfig)
+    if(securitySystemConfig){
+      this.securitySystem = new SecuritySystem(securitySystemConfig)
+    }
     this.door = new Door(doorConfig);
-
     for (let i = 0; i < windowsConfig.count; i++) {
       this.windows.push(new WindowModel(windowsConfig));
     }
