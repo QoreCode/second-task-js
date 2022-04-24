@@ -1,7 +1,6 @@
 import {HouseStyle} from '../interfaces';
-import { SecuritySystem } from './security-system';
 
-export class Door extends SecuritySystem {
+export class Door {
   public doorSize = 0;
   public doorStyle: HouseStyle = HouseStyle.NEO;
   public open = false;
