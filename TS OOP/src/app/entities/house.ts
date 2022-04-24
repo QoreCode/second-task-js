@@ -1,3 +1,4 @@
+import {HouseStyle} from '../interfaces';
 import { Door } from './door';
 import { WindowModel } from './window-model';
 
@@ -10,8 +11,8 @@ export class House extends Door {
   public window4: WindowModel | null = null;
 
   public constructor(
-    windowsConfig: { count: number, size: number; style: 'neo' | 'classic' | 'modern' },
-    doorConfig: { size: number; style: 'neo' | 'classic' | 'modern' },
+    windowsConfig: { count: number, size: number; style: HouseStyle },
+    doorConfig: { size: number; style: HouseStyle },
     securitySystemConfig?: { type: 'modern' | 'amateur' | 'professional' },
   ) {
 
@@ -61,7 +62,7 @@ export class House extends Door {
     this.color = color;
   }
 
-  public addFloor() {
+  public addFloor(): void {
     this.maxFloor += 1;
   }
 }

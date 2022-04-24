@@ -1,6 +1,8 @@
+import {HouseStyle} from '../interfaces';
+
 export class WindowModel {
   public size = 0;
-  public style: 'neo' | 'classic' | 'modern' = 'neo';
+  public style: HouseStyle = HouseStyle.NEO;
   public open = false;
 
   public openWindow(): void {
