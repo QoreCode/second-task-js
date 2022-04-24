@@ -1,3 +1,5 @@
+import { func } from './index.js'
+
 try {
     const testsData = [
         {args: ['sntriignhgs', 'n'], expectedResult: 7},
