@@ -5,10 +5,8 @@ import { WindowModel } from './window-model';
 export class House extends Door {
   public maxFloor = 1;
   public color = 'black';
-  public window1: WindowModel | null = null;
-  public window2: WindowModel | null = null;
-  public window3: WindowModel | null = null;
-  public window4: WindowModel | null = null;
+
+  public windows: WindowModel[] = [];
 
   public constructor(
     windowsConfig: { count: number, size: number; style: HouseStyle },
@@ -23,28 +21,11 @@ export class House extends Door {
       this.securitySystemType = securitySystemConfig.type;
     }
 
-    if (windowsConfig.count >= 1) {
-      this.window1 = new WindowModel();
-      this.window1.size = windowsConfig.size;
-      this.window1.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 2) {
-      this.window2 = new WindowModel();
-      this.window2.size = windowsConfig.size;
-      this.window2.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 3) {
-      this.window3 = new WindowModel();
-      this.window3.size = windowsConfig.size;
-      this.window3.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 4) {
-      this.window4 = new WindowModel();
-      this.window4.size = windowsConfig.size;
-      this.window4.style = windowsConfig.style;
+    for(let i=0;i<windowsConfig.count;i++){
+      const window = new WindowModel();
+      window.size = windowsConfig.size;
+      window.style = windowsConfig.style;
+      this.windows.push(window);
     }
 
     this.doorSize = doorConfig.size;
@@ -52,10 +33,7 @@ export class House extends Door {
   }
 
   public openAllWindows(): void {
-    this.window1?.openWindow();
-    this.window2?.openWindow();
-    this.window3?.openWindow();
-    this.window4?.openWindow();
+    this.windows.forEach(w => w.openWindow());
   }
 
   public paint(color: string): void {
