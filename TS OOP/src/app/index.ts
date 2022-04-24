@@ -51,8 +51,10 @@ async function user2ClientFlow(): Promise<void> {
 
 user1ClientFlow().then(() => {
   console.log('//--------------------//');
-  user2ClientFlow();
-});
+  return user2ClientFlow()
+}).then(()=>{
+  console.log('//-------- success ------------//');
+}).catch(e => console.error(e))
 
 
 
