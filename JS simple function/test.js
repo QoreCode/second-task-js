@@ -6,9 +6,9 @@ try {
         {args: ['sntriignhgs', 'h', 'i'], expectedResult: 8},
         {args: ['sntriignhgs', 'i'], expectedResult: 5},
         {args: ['sntriignhgs', 'z', 'x'], expectedResult: -1},
-        {args: ['sntriignhgs', 'nhg', 'sn'], expectedResult: -1},
         {args: ['sntriignhgs', 's', 'r'], expectedResult: 10},
-        {args: ['', 's', 'r'], expectedResult: -1}
+        {args: ['', 's', 'r'], expectedResult: -1},
+        {args: ['sntriignhgs', 'nhg', 'sn'], expectedResult: -1}
     ];
 
     testsData.forEach((testData) => test(testData.args, testData.expectedResult));
