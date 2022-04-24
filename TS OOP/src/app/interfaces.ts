@@ -9,3 +9,9 @@ export enum SecurityType {
   AMATEUR = 'amateur',
   PROFESSIONAL = 'professional'
 }
+
+export enum SecurityStatus {
+  OK = 'ok',
+  WARNING = 'warning',
+  ERROR = 'error'
+}

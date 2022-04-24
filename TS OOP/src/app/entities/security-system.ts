@@ -1,11 +1,11 @@
-import {SecurityType} from '../interfaces';
+import {SecurityStatus, SecurityType} from '../interfaces';
 
 export interface ISecuritySystemConfig {
   type: SecurityType;
 }
 
 export class SecuritySystem {
-  public status: 'ok' | 'warning' | 'error' = 'ok';
+  public status: SecurityStatus = SecurityStatus.OK;
   public enabled = false;
 
   public config: ISecuritySystemConfig = {
@@ -21,10 +21,12 @@ export class SecuritySystem {
 
   public enableSecuritySystem(): void {
     // код, который включает систему
+    this.enabled = true;
   }
 
   public disableSecuritySystem(): void {
     // код, который выключает систему
+    this.enabled = false;
   }
 
   public diagnosingSecuritySystem(): void {
