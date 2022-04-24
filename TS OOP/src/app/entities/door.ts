@@ -6,9 +6,18 @@ export interface IDoorConfig {
 }
 
 export class Door {
+  public config: IDoorConfig = {
+    size: 0,
+    style: HouseStyle.NEO
+  }
+
   public open = false;
 
-  constructor(public config: IDoorConfig) {
+  constructor(config: IDoorConfig) {
+    this.config = {
+      ...this.config,
+      ...config
+    }
   }
 
   public openDoor(): void {
