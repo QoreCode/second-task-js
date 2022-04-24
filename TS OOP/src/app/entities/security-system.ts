@@ -1,10 +1,18 @@
 import {SecurityType} from '../interfaces';
 
+export interface ISecuritySystemConfig {
+  type: SecurityType;
+}
+
 export class SecuritySystem {
-  public securitySystemType: SecurityType = SecurityType.MODERN;
   public status: 'ok' | 'warning' | 'error' = 'ok';
   public enabled = false;
   public securitySystemNotCreated = true;
+  private securitySystemType = SecurityType.MODERN;
+
+  constructor(config?: Partial<ISecuritySystemConfig>) {
+    if (config?.type) this.securitySystemType = config.type;
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему

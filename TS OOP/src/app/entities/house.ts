@@ -1,12 +1,22 @@
 import {HouseStyle, SecurityType} from '../interfaces';
-import { Door } from './door';
-import { WindowModel } from './window-model';
+import {Door} from './door';
+import {SecuritySystem} from './security-system';
+import {WindowModel} from './window-model';
 
-export class House extends Door {
+export class House {
   public maxFloor = 1;
   public color = 'black';
 
   public windows: WindowModel[] = [];
+  public door: Door;
+  public securitySystem: SecuritySystem;
+
+  // этот флаг использовался в старом наследовании
+  // оставил для возможной совместимости
+  // хотя он нигде не используется
+  public securitySystemNotCreated(): boolean {
+    return this.securitySystem != undefined;
+  }
 
   public constructor(
     windowsConfig: { count: number, size: number; style: HouseStyle },
@@ -14,22 +24,15 @@ export class House extends Door {
     securitySystemConfig?: { type: SecurityType },
   ) {
 
-    super();
+    this.securitySystem = new SecuritySystem(securitySystemConfig)
+    this.door = new Door(doorConfig);
 
-    if (securitySystemConfig) {
-      this.securitySystemNotCreated = true;
-      this.securitySystemType = securitySystemConfig.type;
-    }
-
-    for(let i=0;i<windowsConfig.count;i++){
+    for (let i = 0; i < windowsConfig.count; i++) {
       const window = new WindowModel();
       window.size = windowsConfig.size;
       window.style = windowsConfig.style;
       this.windows.push(window);
     }
-
-    this.doorSize = doorConfig.size;
-    this.doorStyle = doorConfig.style;
   }
 
   public openAllWindows(): void {

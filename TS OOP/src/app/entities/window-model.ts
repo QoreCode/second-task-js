@@ -7,9 +7,11 @@ export class WindowModel {
 
   public openWindow(): void {
     // код, который открывает дверь
+    this.open = true;
   }
 
   public closeWindow(): void {
     // код, который закрывает дверь
+    this.open = false;
   }
 }
