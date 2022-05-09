@@ -1,34 +1,18 @@
-export function func(s, a, b) {
+module.exports = function func(s, a, b) {
+    if (!s.length) return -1;
 
-    if (s.match(/^$/)) {
-        return -1;
+    let i = s.length - 1;
+
+    while (i > 0) {
+        const sSubstr = s.substring(i, i + 1);
+
+        if ([a, b].includes(sSubstr)) return i;
+
+        i--;
     }
 
-    var i = s.length - 1;
-    var aIndex = -1;
-    var bIndex = -1;
+    return -1;
+};
 
-    while ((aIndex == -1) && (bIndex == -1) && (i > 0)) {
-        if (s.substring(i, i + 1) == a) {
-            aIndex = i;
-        }
-        if (s.substring(i, i + 1) == b) {
-            bIndex = i;
-        }
-        i = i - 1;
-    }
-
-    if (aIndex != -1) {
-        if (bIndex == -1) {
-            return aIndex;
-        } else {
-            return Math.max(aIndex, bIndex);
-        }
-    }
-
-    if (bIndex != -1) {
-        return bIndex;
-    } else {
-        return -1;
-    }
-}
+// Из самой фунции сложно понять что она делает)
+// Но если я правильно понял тесты, то я бы решил это как-то так
