@@ -1,18 +1,17 @@
+import { Style } from '../types/style';
+import { SystemType } from '../types/system';
 import { Door } from './door';
 import { WindowModel } from './window-model';
 
 export class House extends Door {
-  public maxFloor: number = 1;
-  public color: string = 'black';
-  public window1: WindowModel | null = null;
-  public window2: WindowModel | null = null;
-  public window3: WindowModel | null = null;
-  public window4: WindowModel | null = null;
+  public maxFloor = 1;
+  public color = 'black';
+  public windows: WindowModel[] | null = null;
 
   public constructor(
-    windowsConfig: { count: number, size: number; style: 'neo' | 'classic' | 'modern' },
-    doorConfig: { size: number; style: 'neo' | 'classic' | 'modern' },
-    securitySystemConfig?: { type: 'modern' | 'amateur' | 'professional' },
+    windowsConfig: { count: number, size: number; style: Style },
+    doorConfig: { size: number; style: Style },
+    securitySystemConfig?: { type: SystemType },
   ) {
 
     super();
@@ -22,46 +21,31 @@ export class House extends Door {
       this.securitySystemType = securitySystemConfig.type;
     }
 
-    if (windowsConfig.count >= 1) {
-      this.window1 = new WindowModel();
-      this.window1.size = windowsConfig.size;
-      this.window1.style = windowsConfig.style;
-    }
+    this.windows = Array.from({ length: windowsConfig.count }, () => {
+      const window = new WindowModel();
+      const { size, style } = windowsConfig;
 
-    if (windowsConfig.count >= 2) {
-      this.window2 = new WindowModel();
-      this.window2.size = windowsConfig.size;
-      this.window2.style = windowsConfig.style;
-    }
+      window.size = size;
+      window.style = style;
 
-    if (windowsConfig.count >= 3) {
-      this.window3 = new WindowModel();
-      this.window3.size = windowsConfig.size;
-      this.window3.style = windowsConfig.style;
-    }
-
-    if (windowsConfig.count >= 4) {
-      this.window4 = new WindowModel();
-      this.window4.size = windowsConfig.size;
-      this.window4.style = windowsConfig.style;
-    }
+      return window;
+    })
 
     this.doorSize = doorConfig.size;
     this.doorStyle = doorConfig.style;
   }
 
-  public openAllWindows() {
-    this.window1?.openWindow();
-    this.window2?.openWindow();
-    this.window3?.openWindow();
-    this.window4?.openWindow();
+  public openAllWindows(): void {
+    if (this.windows) {
+      this.windows.forEach((item) => item.openWindow())
+    }
   }
 
-  public paint(color: string) {
+  public paint(color: string): void {
     this.color = color;
   }
 
-  public addFloor() {
+  public addFloor(): void {
     this.maxFloor += 1;
   }
 }

@@ -1,7 +1,9 @@
+import { Style } from '../types/style';
+
 export class WindowModel {
-  public size: number = 0;
-  public style: 'neo' | 'classic' | 'modern' = 'neo';
-  public open: boolean = false;
+  public size = 0;
+  public style: Style = 'neo';
+  public open = false;
 
   public openWindow(): void {
     // код, который открывает дверь

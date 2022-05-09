@@ -1,8 +1,10 @@
+import { SystemStatus, SystemType } from '../types/system';
+
 export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+  public securitySystemType: SystemType = 'modern';
+  public status: SystemStatus = 'ok';
+  public enabled = false;
+  public securitySystemNotCreated = true;
 
   public enableSecuritySystem(): void {
     // код, который включает систему
