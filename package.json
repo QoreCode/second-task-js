@@ -1,0 +1,23 @@
+{
+  "name": "second-task",
+  "version": "1.0.0",
+  "description": "Ребят, в данном задании вам нужно отрефакторить чужой код.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test-js": "node 'JS simple function'/test.js",
+    "test-ts": "echo 'hehe'",
+    "test": "npm run test-js && npm run test-ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denbon05/second-task-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denbon05/second-task-js/issues"
+  },
+  "homepage": "https://github.com/denbon05/second-task-js#readme"
+}
