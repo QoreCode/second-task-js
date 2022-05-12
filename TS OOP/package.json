@@ -48,7 +48,8 @@
   "scripts": {
     "serve": "webpack serve --mode=development --progress",
     "build": "webpack",
-    "build:prod": "webpack --config webpack.config.prod.ts"
+    "build:prod": "webpack --config webpack.config.prod.ts",
+    "fix": "npx eslint --fix src/"
   },
   "engines": {
     "node": ">=14.0.0"

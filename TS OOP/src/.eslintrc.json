@@ -4,6 +4,8 @@
     "project": "../tsconfig.*?.json",
     "createDefaultProgram": true
   },
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "rules": {}
 }

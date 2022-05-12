@@ -1,8 +1,15 @@
-export class SecuritySystem {
-  public securitySystemType: 'modern' | 'amateur' | 'professional' = 'modern';
-  public status: 'ok' | 'warning' | 'error' = 'ok';
-  public enabled: boolean = false;
-  public securitySystemNotCreated: boolean = true;
+import type { ISecuritySystem, ISecuritySystemParams, SecuritySystemType, Status } from '../interfaces';
+import { Notification } from './notification';
+
+export class SecuritySystem implements ISecuritySystem {
+  public securitySystemType: SecuritySystemType = 'modern';
+  public status: Status = 'ok';
+  public enabled = false;
+  public isCreatedSecuritySystem = false;
+
+  constructor({ type }: ISecuritySystemParams) {
+    this.securitySystemType = type;
+  }
 
   public enableSecuritySystem(): void {
     // код, который включает систему
@@ -19,16 +26,6 @@ export class SecuritySystem {
   }
 
   protected pushStatusNotification(): void {
-    if (this.securitySystemType === 'professional') {
-      // код, который уведомляет пользователя на почту
-    }
-
-    if (this.securitySystemType === 'modern') {
-      // код, который уведомляет пользователя на телефон
-    }
-
-    if (this.securitySystemType === 'amateur') {
-      // код, который уведомляет пользователя мелом на доске
-    }
+    Notification.send(this.securitySystemType);
   }
 }

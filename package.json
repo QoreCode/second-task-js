@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test-js": "node 'JS simple function'/test.js",
-    "test-ts": "echo 'hehe'",
-    "test": "npm run test-js && npm run test-ts"
+    "test": "node 'JS simple function'/test.js"
   },
   "repository": {
     "type": "git",

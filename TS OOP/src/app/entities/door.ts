@@ -1,9 +1,14 @@
-import { SecuritySystem } from './security-system';
+import { DoorStyle, IDoor, IDoorParams } from '../interfaces';
 
-export class Door extends SecuritySystem {
-  public doorSize: number = 0;
-  public doorStyle: 'neo' | 'classic' | 'modern' = 'neo';
-  public open: boolean = false;
+export class Door implements IDoor {
+  public doorSize = 0;
+  public doorStyle: DoorStyle = 'neo';
+  public open = false;
+
+  public constructor({ size, style }: IDoorParams) {
+    this.doorSize = size;
+    this.doorStyle = style;
+  }
 
   public openDoor(): void {
     // код, который открывает дверь

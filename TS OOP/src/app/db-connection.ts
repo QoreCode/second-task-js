@@ -1,3 +1,5 @@
+import type { IHouse } from './interfaces';
+
 export class DBConnection {
   private readonly host: string;
   private readonly user: string;
@@ -13,19 +15,19 @@ export class DBConnection {
     this.openConnection();
   }
 
-  public async execute(someData: any): Promise<any> {
+  public async execute(someData: any): Promise<void> {
     // тут создается кастомной транзакции или что-либо угодно
-  };
+  }
 
-  public async save(someEntity: any): Promise<any> {
+  public async save(someEntity: IHouse): Promise<void> {
     // тут создается транзакция или что-либо угодно для сохранения сущности
-  };
+  }
 
-  public closeConnection() {
+  public closeConnection(): void {
     // тут закрывается connection к источнику данных для выполнения запроса
   }
 
-  private openConnection() {
+  private openConnection(): void {
     // тут открывается connection к источнику данных для выполнения запроса
   }
 }
