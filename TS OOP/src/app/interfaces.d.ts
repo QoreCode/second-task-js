@@ -21,11 +21,6 @@ export interface ISecuritySystemParams {
 }
 
 export interface ISecuritySystem {
-  securitySystemType: SecuritySystemType;
-  status: Status;
-  enabled: boolean;
-  isCreatedSecuritySystem: boolean;
-
   enableSecuritySystem(): void;
 
   disableSecuritySystem(): void;
@@ -42,10 +37,6 @@ export interface IDoorParams {
 }
 
 export interface IDoor {
-  doorSize: number;
-  doorStyle: DoorStyle;
-  open: boolean;
-
   openDoor(): void;
 
   closeDoor(): void;

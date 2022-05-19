@@ -1,9 +1,9 @@
 import { DoorStyle, IDoor, IDoorParams } from '../interfaces';
 
 export class Door implements IDoor {
-  public doorSize = 0;
-  public doorStyle: DoorStyle = 'neo';
-  public open = false;
+  private doorSize = 0;
+  private doorStyle: DoorStyle = 'neo';
+  private open = false;
 
   public constructor({ size, style }: IDoorParams) {
     this.doorSize = size;

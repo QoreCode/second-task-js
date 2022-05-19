@@ -5,14 +5,22 @@ export class DBConnection {
   private readonly user: string;
   private readonly pass: string;
   private readonly dbName: string;
+  private static dbInstance: DBConnection | null;
 
-  public constructor(host: string, user: string, pass: string, dbName: string) {
+  private constructor(host: string, user: string, pass: string, dbName: string) {
     this.host = host;
     this.user = user;
     this.pass = pass;
     this.dbName = dbName;
 
-    this.openConnection();
+    DBConnection.openConnection();
+  }
+
+  public static getDBInstance(host: string, user: string, pass: string, dbName: string): DBConnection {
+    if (!this.dbInstance) {
+      this.dbInstance = new DBConnection(host, user, pass, dbName);
+    }
+    return this.dbInstance;
   }
 
   public async execute(someData: any): Promise<void> {
@@ -27,7 +35,7 @@ export class DBConnection {
     // тут закрывается connection к источнику данных для выполнения запроса
   }
 
-  private openConnection(): void {
+  private static openConnection(): void {
     // тут открывается connection к источнику данных для выполнения запроса
   }
 }

@@ -1,8 +1,9 @@
-import type { IWindowModel, Style, WindowModelParams } from '../interfaces';
+import type { IWindowModel, WindowModelParams } from '../interfaces';
+import { Style } from '../interfaces';
 
 export class WindowModel implements IWindowModel {
   public size = 0;
-  public style: Style = 'neo';
+  public style: Style = "neo";
   public isOpen = false;
 
   constructor({ style, size }: WindowModelParams) {

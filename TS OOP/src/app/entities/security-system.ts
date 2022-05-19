@@ -2,10 +2,9 @@ import type { ISecuritySystem, ISecuritySystemParams, SecuritySystemType, Status
 import { Notification } from './notification';
 
 export class SecuritySystem implements ISecuritySystem {
-  public securitySystemType: SecuritySystemType = 'modern';
-  public status: Status = 'ok';
-  public enabled = false;
-  public isCreatedSecuritySystem = false;
+  private securitySystemType: SecuritySystemType = 'modern';
+  private status: Status = 'ok';
+  private enabled = false;
 
   constructor({ type }: ISecuritySystemParams) {
     this.securitySystemType = type;
